@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>走动的时间（HTML 版）</title>
+
+<!--页面的 CSS 样式放在 style 标签中-->
+<style type="text/css">
+.nowDiv{ /* class 选择器，对页面中所有 class 属性包含 nowDiv 的元素生效*/
+font-size: 32px; /* 字号*/
+}
+
+#nowSpan{ /* id 选择器，对页面中 id 属性为 nowSpan 的那个元素生效*/
+color: #ff0000; /* 前景色*/
+border-bottom: 2px dotted blue; /* 下边框（粗细、样式、颜色）*/
+}
+</style>
+
+<!--页面的 JavaScript 代码放在 script 标签中-->
+<script type="text/javascript">
+function setNow() { /* 修改 span 元素的内容*/
+var now = new Date(); // 得到系统(浏览器所在机器)当前时间
+var h = now.getHours(); // 时、分、秒
+var m = now.getMinutes();
+var s = now.getSeconds();
+
+h = h < 10 ? ("0"+ h) : h; // 时、分、秒若不够两位，则加前导零
+m = m < 10 ? ("0"+ m) : m;
+s = s < 10 ? ("0"+ s) : s;
+
+// 根据 id 得到页面元素对象
+var nowSpan = document.getElementById("nowSpan");
+nowSpan.innerHTML = h + ":"+ m + ":"+ s; // 修改元素的内容
+}
+
+function start() {
+setInterval(setNow, 1000); // 每过 1 秒调用一次上面的函数
+}
+</script>
+</head>
+
+<body onload="start()">
+<!--页面从服务器下载完毕后执行上面的 start 函数-->
+<div class="nowDiv">
+ 现在时间是：<span id="nowSpan">N/A</span>
+</div>
+</body>
+</html>
